@@ -35,12 +35,12 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with: 
           # here we have to add all the packages we used in the script!
-          packages: |
-            any::gh
-            #      any::dplyr
             #any::tidyr
             #any::readr
             #any::knitr 
+          packages: |
+            any::gh
+            any::dplyr
 
       - name: Generate data
         run: |
