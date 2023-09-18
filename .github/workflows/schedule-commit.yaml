@@ -37,10 +37,10 @@ jobs:
           # here we have to add all the packages we used in the script!
           packages: |
             any::gh
-            any::dplyr
-            any::tidyr
-            any::readr
-            any::knitr 
+            #      any::dplyr
+            #any::tidyr
+            #any::readr
+            #any::knitr 
 
       - name: Generate data
         run: |
