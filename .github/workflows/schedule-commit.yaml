@@ -28,8 +28,6 @@ jobs:
           r-version: ${{ matrix.config.r }}
           http-user-agent: ${{ matrix.config.http-user-agent }}
 
-      - uses: r-lib/actions/setup-pandoc@main
-
       # imports an action from another repository, 
       # that deals with the dependencies
       - uses: r-lib/actions/setup-r-dependencies@v2
