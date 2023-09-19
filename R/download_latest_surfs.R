@@ -10,7 +10,11 @@ suppressPackageStartupMessages({
 # Step 1: Polar
 # Get file from polar API
 
-my_config <- read_yaml("SURFING_POLAR/config.yml_SURF")
+#my_config <- read_yaml("SURFING_POLAR/config.yml_SURF")
+my_config <- NULL
+my_config$user_id <- Sys.getenv("POLAR_USERID")
+my_config$access_token <- Sys.getenv("POLAR_ACCESS")
+
 
 # create transaction
 myf1 = POST(paste0("https://www.polaraccesslink.com/v3/users/", my_config$user_id, "/exercise-transactions"),
@@ -67,7 +71,7 @@ for (ex in myd2$exercises) {
                  add_headers(Authorization = paste0("Bearer ", my_config$access_token)))
     warn_for_status(my_gpx)
     my_gpx_data = content(my_gpx, as="text", encoding = "UTF-8")
-    my_filename <- paste0("surfing_polar_", str_replace_all(myexd1$`start-time`,":","-"), ".gpx")
+    my_filename <- paste0("surfs/surfing_polar_", str_replace_all(myexd1$`start-time`,":","-"), ".gpx")
     write(my_gpx_data, file=my_filename)
     cat(paste0("Downloaded and saved gpx file: ", my_filename ,"\n\n"))
   } else {
@@ -77,8 +81,7 @@ for (ex in myd2$exercises) {
 }
 
 # commit transaction and delete data
-my_form_commit = PUT(paste0("https://www.polaraccesslink.com/v3/users/", my_config$user_id,
-                            "/exercise-transactions/", myd1$`transaction-id`),
+my_form_commit = PUT(paste0("https://www.polaraccesslink.com/v3/users/", my_config$user_id, "/exercise-transactions/", myd1$`transaction-id`),
                      add_headers(Authorization = paste0("Bearer ", my_config$access_token)))
 warn_for_status(my_form_commit)
 # my_form_commit
