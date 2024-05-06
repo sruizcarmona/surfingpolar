@@ -74,6 +74,15 @@ for (ex in myd2$exercises) {
     my_filename <- paste0("surfs/surfing_polar_", str_replace_all(myexd1$`start-time`,":","-"), ".gpx")
     write(my_gpx_data, file=my_filename)
     cat(paste0("Downloaded and saved gpx file: ", my_filename ,"\n\n"))
+    # get tcx
+    my_tcx = GET(paste0(ex,"/tcx"),
+                 add_headers(Accept = "application/tcx+xml"),
+                 add_headers(Authorization = paste0("Bearer ", my_config$access_token)))
+    warn_for_status(my_tcx)
+    my_tcx_data = content(my_tcx, as="text", encoding = "UTF-8")
+    my_filename_tcx <- paste0("surfs/surfing_polar_", str_replace_all(myexd1$`start-time`,":","-"), ".tcx")
+    write(my_tcx_data, file=my_filename_tcx)
+    cat(paste0("Downloaded and saved tcx file: ", my_filename_tcx ,"\n\n"))
   } else {
     cat(paste0("Activity ", act_n, " does not have correct surfing data.\nActivity ignored.\n\n"))
   }
