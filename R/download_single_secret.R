@@ -18,7 +18,7 @@ my_config$multi_secret <- Sys.getenv("POLAR_MULTI_SECRET")
 
 my_config$id <- strsplit(my_config$multi_secret, "::")[[1]][1]
 my_config$user_id <- strsplit(my_config$multi_secret, "::")[[1]][2]
-my_config$secret <- strsplit(my_config$multi_secret, "::")[[1]][3]
+my_config$access_token <- strsplit(my_config$multi_secret, "::")[[1]][3]
 
 # check if folder exists and create if not
 out_dir <- paste0('surfs/', my_config$id)
