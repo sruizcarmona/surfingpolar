@@ -76,7 +76,7 @@ for (ex in myd2$exercises) {
     cat(paste0("Downloaded and saved gpx file: ", my_filename ,"\n\n"))
     # get tcx
     my_tcx = GET(paste0(ex,"/tcx"),
-                 add_headers(Accept = "application/tcx+xml"),
+                 add_headers(Accept = "application/vnd.garmin.tcx+xml"),
                  add_headers(Authorization = paste0("Bearer ", my_config$access_token)))
     warn_for_status(my_tcx)
     my_tcx_data = content(my_tcx, as="text", encoding = "UTF-8")
